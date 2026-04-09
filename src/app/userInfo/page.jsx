@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import CustomForm from "../../../components/Form/CustomForm.jsx";
 import { useRouter } from "next/navigation";
 import Tabs from "../../../components/Tab/Tab.jsx";
+import Table from "../../../components/Table/Table.jsx";
 
 export default function UserForm() {
   const [open, setOpen] = useState(false);
@@ -23,6 +24,12 @@ export default function UserForm() {
   };
 
   const [transaction, setTransaction] = useState(null);
+  const columns = [
+    { header: "Name", name: "name" },
+    { header: "Email", name: "email" },
+    { header: "Text", name: "text" },
+    { header: "Amount", name: "amount" },
+  ];
 
   const tabData = [
     {
@@ -48,35 +55,8 @@ export default function UserForm() {
       <div className="bg-white border rounded-2xl p-6">
         <h2 className="text-lg font-semibold mb-4 text-center">Transactions</h2>
 
-        {!transaction ? (
-          <p className="text-sm text-gray-500 text-center">
-            No transactions yet...
-          </p>
-        ) : (
-          <div className="overflow-x-auto">
-            <table className="w-full border  rounded-lg text-sm">
-              
-              <thead >
-                <tr>
-                  <th className="p-2 border">Name</th>
-                  <th className="p-2 border">Email</th>
-                  <th className="p-2 border">Text</th>
-                  <th className="p-2 border">Amount</th>
-                </tr>
-              </thead>
+        <Table columns={columns} data={transaction ? [transaction] : []} />
 
-              <tbody>
-                <tr className="text-center">
-                  <td className="p-2 border">{transaction?.name}</td>
-                  <td className="p-2 border">{transaction?.email}</td>
-                  <td className="p-2 border">{transaction?.text}</td>
-                  <td className="p-2 border">₹{transaction?.amount}</td>
-                </tr>
-              </tbody>
-
-            </table>
-          </div>
-        )}
       </div>
     )
   }
@@ -97,11 +77,14 @@ export default function UserForm() {
           Payment Management System Using Form
         </div>
 
-        <div className="flex justify-end">
-          <div className="bg-white border border-gray-300 rounded-xl px-4 py-2.5 text-sm font-medium text-zinc-800 flex items-center gap-2">
-            - Ashish Panwar
+        {/* <div className="grid gap-2 place-items-end">
+          <div className="bg-white border border-gray-300 rounded-xl px-4 py-2.5 text-sm font-medium text-zinc-800">
+            Developed by - Ashish Panwar
           </div>
-        </div>
+          <div onClick={() => router.push('/login')} className="cursor-pointer hover:bg-gray-300 bg-black border text-white border-gray-300 rounded-xl px-4 py-2.5 text-sm font-medium hover:text-black">
+            Log Out
+          </div>
+        </div> */}
 
         <Tabs tabs={tabData} />
 
