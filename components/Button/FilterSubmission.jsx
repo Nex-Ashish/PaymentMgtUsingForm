@@ -1,4 +1,4 @@
-export default function FilterButton({ value, onChange }) {
+export default function FilterSubmission({ value, onChange }) {
     return (
         <div className="flex gap-1 items-center ">
 

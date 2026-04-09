@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { MockData } from "../../../../../components/MockData/MockData";
 import Table from "../../../../../components/Table/Table";
 import Heading from "../../../../../components/Heading/Heading";
-import FilterButton from "../../../../../components/Button/FilterButton";
+import FilterSubmission from "../../../../../components/Button/FilterSubmission";
 
 export default function FormSubmissions() {
   const [data, setData] = useState([]);
@@ -41,7 +41,7 @@ export default function FormSubmissions() {
 
       <Heading title="Submissions" className="pt-3 pb-10" />
 
-      <FilterButton value={filter} onChange={setFilter} />
+      <FilterSubmission value={filter} onChange={setFilter} />
 
       <div className="bg-white p-4 rounded-xl shadow">
         <Table columns={columns} data={filterData} />
