@@ -46,10 +46,18 @@ export default function Login() {
   };
 
   return (
-    <div style={{ minHeight: "100vh" }} className="flex items-center justify-center bg-red-200 p-4">
+    <div style={{ minHeight: "100vh" }} className="grid place-items-center justify-center bg-red-200 p-4">
+
+      <div className="w-full flex justify-center pt-1 md:pt-4 px-4">
+        <div className="bg-white border border-red-300 rounded-xl px-6 py-2 shadow-sm text-center w-full max-w-sm">
+          <h2 className="text-md font-semibold text-red-700">For: Admin Case</h2>
+          <p className="text-sm text-gray-700">Email: admin@gmail.com</p>
+          <p className="text-sm text-gray-700">Password: admin@123</p>
+        </div>
+      </div>
       
-      <div className="relative bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-700 rounded-2xl p-10 w-full max-w-sm shadow-sm overflow-hidden">
-        
+      <div className=" bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-700 rounded-2xl p-10 w-full max-w-sm shadow-sm overflow-hidden">
+
         <div className="flex flex-col items-center mb-4">
           <h1 className=" text-3xl font-semibold  ">Welcome back</h1>
           <p className="text-base  mt-1">Sign in to your account</p>
@@ -62,7 +70,7 @@ export default function Login() {
         <form onSubmit={handleSubmit} className="flex flex-col gap-5">
           
           <div className="flex flex-col gap-1.5">
-            <label className="text-[11px] font-medium uppercase tracking-widest text-zinc-400">Email address</label>
+            <label className="text-[11px] font-medium tracking-widest text-zinc-400">Email address</label>
             <div className="relative">
               <input
                 type="email"
@@ -77,7 +85,7 @@ export default function Login() {
           </div>
 
           <div className="flex flex-col gap-1.5">
-            <label className="text-[11px] font-medium uppercase tracking-widest text-zinc-400">Password</label>
+            <label className="text-[11px] font-medium tracking-widest text-zinc-400">Password</label>
             <div className="relative">
               <input
                 type="password"
