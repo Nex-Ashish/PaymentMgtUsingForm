@@ -1,10 +1,10 @@
 "use client"
 
 import { useEffect, useState } from "react";
-import CustomForm from "../../../components/Form/CustomForm.jsx";
+import CustomForm from "../../../components/layout/Form/CustomForm.jsx";
 import { useRouter } from "next/navigation";
-import Tabs from "../../../components/Tab/Tab.jsx";
-import Table from "../../../components/Table/Table.jsx";
+import Tabs from "../../../components/ui/Tab/Tab.jsx";
+import Table from "../../../components/ui/Table/Table.jsx";
 
 export default function UserForm() {
   const [open, setOpen] = useState(false);

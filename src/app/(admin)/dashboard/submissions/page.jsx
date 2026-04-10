@@ -1,5 +1,5 @@
 import { Suspense } from "react";
-import FormSubmissionData from "../../../../../components/Submission/FormSubmissionData";
+import FormSubmissionData from "../../../../../components/common/Submission/FormSubmissionData";
 
 export default function FormSubmissions() {
 

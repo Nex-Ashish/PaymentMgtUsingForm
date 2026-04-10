@@ -2,10 +2,10 @@
 
 import { useEffect, useState } from "react";
 import { MockTransactions } from "../MockData/MockTransaction";
-import Heading from "../Heading/Heading";
-import SearchBar from "../SearchBar/SearchBar";
-import FilterTransaction from "../Button/FilterTransaction";
-import Table from "../Table/Table";
+import Heading from "../../layout/Heading/Heading";
+import SearchBar from "../../ui/SearchBar/SearchBar";
+import FilterTransaction from "../../ui/Button/FilterTransaction";
+import Table from "../../ui/Table/Table";
 import { useSearchParams } from "next/navigation";
 
 export default function TransactionData() {

@@ -3,10 +3,10 @@
 import { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { MockData } from "../MockData/MockData";
-import Heading from "../Heading/Heading";
-import SearchBar from "../SearchBar/SearchBar";
-import FilterSubmission from "../Button/FilterSubmission";
-import Table from "../Table/Table";
+import Heading from "../../layout/Heading/Heading";
+import SearchBar from "../../ui/SearchBar/SearchBar";
+import FilterSubmission from "../../ui/Button/FilterSubmission";
+import Table from "../../ui/Table/Table";
 
 export default function FormSubmissionData() {
   const [data, setData] = useState([]);

@@ -1,5 +1,5 @@
 import { Suspense } from "react";
-import TransactionData from "../../../../../components/Submission/TransactionData";
+import TransactionData from "../../../../../components/common/Submission/TransactionData";
 
 export default function Transactions() {
 
