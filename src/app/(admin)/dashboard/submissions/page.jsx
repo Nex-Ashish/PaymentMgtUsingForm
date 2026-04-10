@@ -69,7 +69,11 @@ export default function FormSubmissions() {
       <FilterSubmission value={filter} onChange={setFilter} />
 
       <div className="bg-white p-4 rounded-xl shadow">
-        <Table columns={columns} data={filteredData} query={query} currentPage={currentPage} />
+        
+        <Suspense key={query + currentPage} >
+          <Table columns={columns} data={filteredData} query={query} currentPage={currentPage} />
+        </Suspense>
+
       </div>
     </div>
   );
