@@ -5,10 +5,16 @@ import Table from "../../../../../components/Table/Table";
 import { MockTransactions } from "../../../../../components/MockData/MockTransaction";
 import Heading from "../../../../../components/Heading/Heading";
 import FilterTransaction from "../../../../../components/Button/FilterTransaction";
+import { useSearchParams } from "next/navigation";
+import SearchBar from "../../../../../components/SearchBar/SearchBar";
 
 export default function Transactions() {
   const [data, setData] = useState([]);
   const [filter, setFilter] = useState('all')
+
+  const searchParams = useSearchParams()
+  const query = searchParams?.get("query") || ""
+  const currentPage = Number(searchParams.get("page")) || 1; // for pagination case in future
 
   const columns = [
     { header: "Name", name: "name" },
@@ -38,17 +44,30 @@ export default function Transactions() {
     // console.log(combinedData,'ddd')
   }, []);
 
-  const filteredData = filter === "all" ? data : data?.filter((item) => item?.method.toLowerCase()[0] === filter.toLowerCase()[0] )
+  const filteredData = data.filter( (item) => {
+                          if(filter === "all") return true
+      
+                          return filter?.method.toLowerCase()[0] === filter.toLowerCase()[0]
+                        })
+                        // filter === "all" ? data : data?.filter((item) => item?.method.toLowerCase()[0] === filter.toLowerCase()[0] )
+
+                        .filter((item) => {
+                          if(!query) return true
+
+                          return ( item?.name?.toLowerCase().includes(query.toLowerCase()) )
+                        })
 
   return (
     <div className="h-[calc(100vh-68px)]  bg-gray-300 p-6 overflow-y-auto">
 
       <Heading title="Transactions" className="pt-3 pb-10" />
 
+      <SearchBar placeholder="Search..." />
+
       <FilterTransaction value={filter} onChange={setFilter} />
 
       <div className="bg-white p-4 rounded-xl shadow">
-        <Table columns={columns} data={filteredData} />
+        <Table columns={columns} data={filteredData} query={query} currentPage={currentPage} />
       </div>
     </div>
   );
