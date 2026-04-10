@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { MockData } from "../../../../../components/MockData/MockData";
 import Table from "../../../../../components/Table/Table";
 import Heading from "../../../../../components/Heading/Heading";
