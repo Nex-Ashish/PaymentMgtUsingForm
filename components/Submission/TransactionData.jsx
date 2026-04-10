@@ -47,7 +47,7 @@ export default function TransactionData() {
   const filteredData = data.filter( (item) => {
                           if(filter === "all") return true
       
-                          return filter?.method.toLowerCase()[0] === filter.toLowerCase()[0]
+                          return item?.method.toLowerCase()[0] === filter.toLowerCase()[0]
                         })
                         // filter === "all" ? data : data?.filter((item) => item?.method.toLowerCase()[0] === filter.toLowerCase()[0] )
 
