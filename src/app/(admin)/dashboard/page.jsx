@@ -1,14 +1,12 @@
 "use client";
 
-import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react"
-import Card from "../../../../components/Card/page.jsx"
-import Heading from "../../../../components/Heading/Heading.jsx";
-import CustomButton from "../../../../components/Button/CustomButton";
-import { MockData } from "../../../../components/MockData/MockData.js";
+import Card from "../../../../components/ui/Card/page.jsx"
+import Heading from "../../../../components/layout/Heading/Heading.jsx";
+import { MockData } from "../../../../components/common/MockData/MockData.js";
+import Sidebar from "../../../../components/layout/Sidebar/Sidebar.jsx";
 
 export default function Dashboard() {
-  const router = useRouter();
 
   const [stats, setStats] = useState({
     users: 0,
@@ -19,9 +17,7 @@ export default function Dashboard() {
 
   useEffect(() => {
     const mock = MockData || [];
-
     const session = JSON.parse(sessionStorage.getItem("paymentData"));
-
     const sessionArray = session ? [session] : [];
 
     const allData = [...mock, ...sessionArray];
@@ -35,23 +31,22 @@ export default function Dashboard() {
     }, []);
 
   return (
-    <div className="h-[calc(100vh-68px)]  bg-gray-300 p-6 overflow-y-auto">
+    <div className="h-[calc(100vh-68px)]  bg-gray-300  overflow-y-auto flex">
 
-      <Heading title="Admin Dashboard" className="pt-3 pb-10" />
+      <Sidebar />
 
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10">
+      <div className="flex-1 p-6 overflow-y-auto">
 
-        <Card title="Users" value={stats?.users} />
-        <Card title="Submissions" value={stats?.submissions} />
-        <Card title="Transactions" value={stats?.transactions} />
-        <Card title="Total Amount" value={`${stats?.amount}`} />
+        <Heading title="Admin Dashboard" className="pt-3 pb-10" />
 
-      </div>
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10">
 
-      <div className="flex flex-col md:flex-row gap-4 justify-center">
+          <Card title="Users" value={stats?.users} />
+          <Card title="Submissions" value={stats?.submissions} />
+          <Card title="Transactions" value={stats?.transactions} />
+          <Card title="Total Amount" value={`${stats?.amount}`} />
 
-        <CustomButton title="View Submissions" onClick={() => router.push("/dashboard/submissions")} className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg"/>
-        <CustomButton title="View Transactions" onClick={() => router.push("/dashboard/transactions")} className="bg-green-600 hover:bg-green-700 text-white px-6 py-2 rounded-lg"/>
+        </div>
 
       </div>
 
