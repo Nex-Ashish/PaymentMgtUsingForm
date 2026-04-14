@@ -3,10 +3,10 @@
 import { useRouter } from 'next/navigation';
 import { useState } from "react";
 
-const adminData = {
-  "email": "admin@gmail.com",
-  "password": "admin@123",
-}
+// const adminData = {
+//   "email": "admin@gmail.com",
+//   "password": "admin@123",
+// }
 
 export default function Login() {
   const router = useRouter();
@@ -15,34 +15,40 @@ export default function Login() {
 
   const [error, setError] = useState("");
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const handleSubmit = async (e) => {
+    try {
+      e.preventDefault();
+      setError("");
 
-    setError("");
+      if (password.length < 6) {
+        setError("Password must be at least 6 characters");
+        return;
+      }
 
-    if (password.length < 6) {
-      setError("Password must be at least 6 characters");
-      return;
-    }
+      // if (email === adminData?.email && password === adminData?.password) {
+      //   router.push('/dashboard');
+      //   return;
+      // }
 
-    const storedUser = JSON.parse(localStorage.getItem("user"));
+      const res = await fetch('/api/auth/login', {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify( { email, password } )
+      })
 
-    if (email === adminData?.email && password === adminData?.password) {
+      const data = await res.json();
+      if(!data.success){
+        // console.log('failed to get data')
+        setError(data.error);
+        return;
+      }
+
       router.push('/dashboard');
-      return;
+    } catch (error) {
+      console.log("failed to login")
     }
-
-    if (!storedUser || storedUser.email !== email) {
-      setError("User not found, please register");
-      return;
-    }
-
-    if (storedUser.password !== password) {
-      setError("Incorrect password");
-      return;
-    }
-
-    router.push('/userInfo');
   };
 
   return (
