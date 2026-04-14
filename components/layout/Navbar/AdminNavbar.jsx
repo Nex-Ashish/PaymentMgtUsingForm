@@ -6,8 +6,22 @@ import { useRouter } from "next/navigation";
 export default function AdminNavbar() {
   const router = useRouter();
 
-  const handleLogout = () => {
-    router.push("/");
+  const handleLogout = async () => {
+    try {
+      const res = await fetch("/api/auth/logout", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        }
+      });
+      const data = await res.json();
+
+      if (data.success) {
+        router.push("/");
+      }
+    } catch (error) {
+      
+    }
   };
 
   return (
