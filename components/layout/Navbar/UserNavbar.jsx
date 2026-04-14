@@ -18,7 +18,7 @@ export default function UserNavbar() {
         <h1 className="text-sm font-medium border p-3 rounded-2xl">Developed by - Ashish</h1>
 
         <button onClick={handleLogout} className="bg-red-500 hover:bg-red-600 px-4 py-2 rounded-lg text-sm font-semibold" > 
-            Logout 
+            Admin Login 
         </button>
       </div>
 
