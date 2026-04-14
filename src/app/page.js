@@ -1,12 +1,12 @@
 import Image from "next/image";
-import Login from "./login/page";
+import UserForm from "./userInfo/page";
 
 export default function Home() {
 
   return (
     <div >
 
-      <Login />
+      <UserForm />
 
     </div>
   );
