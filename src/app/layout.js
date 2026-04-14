@@ -25,7 +25,7 @@ export default function RootLayout({ children }) {
     >
       <body className="min-h-full flex flex-col">
 
-        {pathname === "/userInfo" || pathname === "/" && <UserNavbar />}
+        {(pathname === "/userInfo" || pathname === "/") && <UserNavbar />}
 
         <main className="flex-1">
           {children}

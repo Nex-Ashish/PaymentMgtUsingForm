@@ -38,10 +38,35 @@ export default function FormSubmissionData() {
 
     const updatedData = combinedData.map((item) => ({ ...item, status: item?.status || "Completed", }));
 
-    setData(updatedData);
+    // setData(updatedData);
 
     // console.log(combinedData,'aaa')
   }, []);
+
+  
+    useEffect( () => {
+      const getFormData = async () => {
+        try {
+          const res = await fetch('/api/form', {
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+          })
+          const result = await res.json()
+          // console.log('get-data',result)
+          // setData([...result])
+
+          const updatedData = (result?.data || []).map((item) => ({ ...item, status: "completed", }));
+
+          setData(updatedData); 
+        } catch (error) {
+          console.log('error',error)
+          // alert('Error: ',error)
+        }
+      }
+      getFormData()
+    }, [])
 
   const filteredData = data.filter((item) => { 
                         if (filter === "all") return true; 

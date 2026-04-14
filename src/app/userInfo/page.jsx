@@ -5,6 +5,7 @@ import CustomForm from "../../../components/layout/Form/CustomForm.jsx";
 import { useRouter } from "next/navigation";
 import Tabs from "../../../components/ui/Tab/Tab.jsx";
 import Table from "../../../components/ui/Table/Table.jsx";
+// import { supabase } from "../../../lib/supabaseClient.js";
 
 export default function UserForm() {
   const [open, setOpen] = useState(false);
@@ -17,10 +18,36 @@ export default function UserForm() {
     { name: "amount", label: "Amount", type: "text", placeholder: "Enter amount" }
   ];
 
-  const handleSubmit = (formData) => {
-    setOpen(false);
-    sessionStorage.setItem("paymentData", JSON.stringify(formData));
-    router.push("/payment");
+  const handleSubmit = async (formData) => {
+    
+
+    try {
+      const res = await fetch('/api/form', {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData)
+      })
+
+      console.log('hhello')
+      console.log(res,'ddd')
+
+      const data = await res.json();
+      console.log('post-dataa',data)
+
+      if (!res.ok) {
+        alert("Error saving data");
+        return;
+      }
+      setOpen(false);
+
+      sessionStorage.setItem("paymentData", JSON.stringify(formData));
+      router.push("/payment");
+    } catch (error) {
+      // console.log('error',error)
+      alert('Error: Post api failed ',error)
+    }
   };
 
   const [transaction, setTransaction] = useState(null);
