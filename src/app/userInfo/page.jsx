@@ -5,6 +5,7 @@ import CustomForm from "../../../components/layout/Form/CustomForm.jsx";
 import { useRouter } from "next/navigation";
 import Tabs from "../../../components/ui/Tab/Tab.jsx";
 import Table from "../../../components/ui/Table/Table.jsx";
+import Loading from "../../../components/ui/Loader/Loading.jsx";
 // import { supabase } from "../../../lib/supabaseClient.js";
 
 export default function UserForm() {
@@ -18,10 +19,11 @@ export default function UserForm() {
     { name: "amount", label: "Amount", type: "text", placeholder: "Enter amount" }
   ];
 
-  const handleSubmit = async (formData) => {
-    
+  const [loading, setLoading] = useState(false)
 
+  const handleSubmit = async (formData) => {
     try {
+      setLoading(true)
       const res = await fetch('/api/form', {
         method: "POST",
         headers: {
@@ -30,11 +32,11 @@ export default function UserForm() {
         body: JSON.stringify(formData)
       })
 
-      console.log('hhello')
-      console.log(res,'ddd')
+      // console.log('hhello')
+      // console.log(res,'ddd')
 
       const data = await res.json();
-      console.log('post-dataa',data)
+      // console.log('post-dataa',data)
 
       if (!res.ok) {
         alert("Error saving data");
@@ -47,6 +49,8 @@ export default function UserForm() {
     } catch (error) {
       // console.log('error',error)
       alert('Error: Post api failed ',error)
+    } finally{
+      setLoading(false)
     }
   };
 
@@ -117,7 +121,11 @@ export default function UserForm() {
 
       </div>
 
-      <CustomForm open={open} setOpen={setOpen} fields={fields} onSubmit={handleSubmit} title="User Form" />
+      {loading ?
+        <Loading />
+        : 
+        <CustomForm open={open} setOpen={setOpen} fields={fields} onSubmit={handleSubmit} title="User Form" />
+      }
 
     </div>
   );
