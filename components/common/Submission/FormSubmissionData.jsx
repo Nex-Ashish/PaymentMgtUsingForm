@@ -7,6 +7,7 @@ import Heading from "../../layout/Heading/Heading";
 import SearchBar from "../../ui/SearchBar/SearchBar";
 import FilterSubmission from "../../ui/Button/FilterSubmission";
 import Table from "../../ui/Table/Table";
+import Loading from "../../ui/Loader/Loading";
 
 export default function FormSubmissionData() {
   const [data, setData] = useState([]);
@@ -18,6 +19,8 @@ export default function FormSubmissionData() {
   const searchParams = useSearchParams();
   const query = searchParams.get("query") || "";
   const currentPage = Number(searchParams.get("page")) || 1; // for pagination case in future
+
+  const [loading, setLoading] = useState(false)
 
   const columns = [
     { header: "Name", name: "name" },
@@ -47,6 +50,7 @@ export default function FormSubmissionData() {
     useEffect( () => {
       const getFormData = async () => {
         try {
+          setLoading(true)
           const res = await fetch('/api/form', {
             method: 'GET',
             headers: {
@@ -63,6 +67,8 @@ export default function FormSubmissionData() {
         } catch (error) {
           console.log('error',error)
           // alert('Error: ',error)
+        } finally{
+          setLoading(false)
         }
       }
       getFormData()
@@ -95,7 +101,11 @@ export default function FormSubmissionData() {
 
       <div className="bg-white p-4 rounded-xl shadow">
         
-        <Table columns={columns} data={filteredData} query={query} currentPage={currentPage} />
+        { loading ?
+            <Loading />
+            : 
+            <Table columns={columns} data={filteredData} query={query} currentPage={currentPage} />
+        }
 
       </div>
     </div>
