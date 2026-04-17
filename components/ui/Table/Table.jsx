@@ -1,6 +1,6 @@
 "use client";
 
-export default function Table({ columns, data, query, currentPage }) {
+export default function Table({ columns, data, edit, query, currentPage }) {
   return (
     <div className="overflow-x-auto">
       <table className="w-full border rounded-lg text-sm">
