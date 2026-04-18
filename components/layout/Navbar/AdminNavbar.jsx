@@ -20,7 +20,7 @@ export default function AdminNavbar() {
         router.push("/");
       }
     } catch (error) {
-      
+      console.log("failed for gettting logout")
     }
   };
 

@@ -1,5 +1,3 @@
-// "use client";
-
 export default function Card({ title, value, className = "" }) {
   return (
     <div
