@@ -28,24 +28,8 @@ export default function FormSubmissionData() {
     { header: "Message", name: "text" },
     { header: "Amount", name: "amount" },
     { header: "Status", name: "status" },
-    { header: "Action", name: "edit" },
+    // { header: "Action", name: "action" },
   ];
-
-  // useEffect(() => {
-  //   const mock = MockData || [];
-
-  //   const session = JSON.parse(sessionStorage.getItem("paymentData"));
-
-  //   const sessionArray = session ? [session] : [];
-
-  //   const combinedData = [...sessionArray, ...mock];
-
-  //   const updatedData = combinedData.map((item) => ({ ...item, status: item?.status || "Completed", }));
-
-  //   // setData(updatedData);
-
-  //   // console.log(combinedData,'aaa')
-  // }, []);
 
   
     useEffect( () => {
@@ -81,7 +65,6 @@ export default function FormSubmissionData() {
                         return item?.status?.toLowerCase() === filter.toLowerCase(); 
                         })
 
-                        // filter === 'all' ? data : data.filter( (item) => item?.status?.toLowerCase() === filter.toLowerCase() )
                         .filter((item) => {
                           if(!query) return true
 
@@ -103,9 +86,9 @@ export default function FormSubmissionData() {
       <div className="bg-white p-4 rounded-xl shadow">
         
         { loading ?
-            <Loading />
-            : 
-            <Table columns={columns} data={filteredData} query={query} currentPage={currentPage} edit="Edit" />
+          <Loading />
+          : 
+          <Table columns={columns} data={filteredData} query={query} currentPage={currentPage} edit={(row) => console.log("Edit:", row)} />
         }
 
       </div>

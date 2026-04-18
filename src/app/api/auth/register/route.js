@@ -20,7 +20,7 @@ export async function POST(req) {
         user_id: user.id,  
         name: name,
         email: email,
-        role: "user", 
+        // role: "user", 
       },
     ]);
 

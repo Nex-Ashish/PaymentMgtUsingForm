@@ -12,9 +12,8 @@ export default function RegisterForm() {
 
   const [error, setError] = useState("")
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-
     setError("")
 
     if (password.length < 6) {
@@ -27,16 +26,40 @@ export default function RegisterForm() {
       return;
     }
 
-    const existingUser = JSON.parse(localStorage.getItem("user"));
-    if (existingUser && existingUser?.email === email) {
-      setError("User already exists, please login");
-      return;
-    }
+    // const existingUser = JSON.parse(localStorage.getItem("user"));
+    // if (existingUser && existingUser?.email === email) {
+    //   setError("User already exists, please login");
+    //   return;
+    // }
 
-    const userData = { name, email, password };
-    localStorage.setItem("user", JSON.stringify(userData));
-    alert("Registration successful!");
-    router.push('/login');
+    // const userData = { name, email, password };
+    // localStorage.setItem("user", JSON.stringify(userData));
+
+    try {
+      const res = await fetch('api/auth/register', {
+        method: "POST",
+        headers: {
+          'Content-Type': "application/json",
+        },
+        body: JSON.stringify({
+          name: name,
+          email: email,
+          password: password,
+        })
+      })
+
+      const result = await res.json();
+      console.log(result,'post-register')
+
+      if(result.success){
+        alert("Registration successful!");
+        router.push('/login');
+      }else{
+        setError(result.error)
+      }
+    } catch (error) {
+      setError(error)
+    }
   };
 
   return (

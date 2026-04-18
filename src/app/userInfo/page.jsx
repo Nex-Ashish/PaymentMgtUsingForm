@@ -6,7 +6,6 @@ import { useRouter } from "next/navigation";
 import Tabs from "../../../components/ui/Tab/Tab.jsx";
 import Table from "../../../components/ui/Table/Table.jsx";
 import Loading from "../../../components/ui/Loader/Loading.jsx";
-// import { supabase } from "../../../lib/supabaseClient.js";
 
 export default function UserForm() {
   const [open, setOpen] = useState(false);
@@ -24,6 +23,7 @@ export default function UserForm() {
   const handleSubmit = async (formData) => {
     try {
       setLoading(true)
+
       const res = await fetch('/api/form', {
         method: "POST",
         headers: {
@@ -55,6 +55,7 @@ export default function UserForm() {
   };
 
   const [transaction, setTransaction] = useState(null);
+  
   const columns = [
     { header: "Name", name: "name" },
     { header: "Email", name: "email" },

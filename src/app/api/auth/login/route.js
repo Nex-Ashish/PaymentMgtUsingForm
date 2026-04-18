@@ -10,10 +10,28 @@ export async function POST(req){
         if(error){
             return Response.json({ success: false, error: error.message }, {status: 401})
         }
+
+        const { data: userData, error: userError} = await supabase
+            .from("users")
+            .select("role")
+            .eq("user_id", data.user.id)
+            .maybeSingle();
+
+        if(userError){
+            return Response.json({ success: false, error: userError.message }, {status: 500});
+        }
+
         const token = data?.session?.access_token;
+
         const response = NextResponse.json(
-          { success: true, user: data.user },
-          { status: 200 }
+        { 
+            success: true, 
+            user: {
+            ...data.user,
+            role: userData?.role || "user",
+            } 
+        },
+        { status: 200 }
         );
 
         response.cookies.set("token", token, {

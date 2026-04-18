@@ -5,8 +5,22 @@ import { useRouter } from "next/navigation";
 export default function UserNavbar() {
   const router = useRouter();
 
-  const handleLogout = () => {
-    router.push("/login");
+  const handleLogout = async () => {
+    try {
+      const res = await fetch("/api/auth/logout", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        }
+      });
+      const data = await res.json();
+
+      if (data.success) {
+        router.push("/");
+      }
+    } catch (error) {
+      console.log("failed for gettting logout")
+    }
   };
 
   return (
@@ -19,6 +33,10 @@ export default function UserNavbar() {
 
         <button onClick={handleLogout} className="bg-red-500 hover:bg-red-600 px-4 py-2 rounded-lg text-sm font-semibold" > 
             Admin Login 
+        </button>
+
+        <button onClick={handleLogout} className="bg-red-500 hover:bg-red-600 px-4 py-2 rounded-lg text-sm font-semibold" > 
+          Logout 
         </button>
       </div>
 
