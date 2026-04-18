@@ -3,11 +3,6 @@
 import { useRouter } from 'next/navigation';
 import { useState } from "react";
 
-// const adminData = {
-//   "email": "admin@gmail.com",
-//   "password": "admin@123",
-// }
-
 export default function LoginForm() {
   const router = useRouter();
   const [email, setEmail] = useState("");
@@ -24,11 +19,6 @@ export default function LoginForm() {
         setError("Password must be at least 6 characters");
         return;
       }
-
-      // if (email === adminData?.email && password === adminData?.password) {
-      //   router.push('/dashboard');
-      //   return;
-      // }
 
       const res = await fetch('/api/auth/login', {
         method: "POST",

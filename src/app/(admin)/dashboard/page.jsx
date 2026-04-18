@@ -9,29 +9,8 @@ import Loading from "../../../../components/ui/Loader/Loading.jsx";
 
 export default function Dashboard() {
 
-  // const [stats, setStats] = useState({
-  //   users: 0,
-  //   submissions: 0,
-  //   transactions: 0,
-  //   amount: 0,
-  // });
   const [loading, setLoading] = useState(false)
   const [data, setData] = useState([])
-
-  // useEffect(() => {
-  //   const mock = MockData || [];
-  //   const session = JSON.parse(sessionStorage.getItem("paymentData"));
-  //   const sessionArray = session ? [session] : [];
-
-  //   const allData = [...mock, ...sessionArray];
-
-  //   setStats({
-  //       users: allData.length, 
-  //       submissions: allData.length,
-  //       transactions: allData.length,
-  //       amount: allData.reduce((acc, curr) => acc + Number(curr?.amount || 0), 0),
-  //   });
-  //   }, []);
 
     useEffect( () => {
       const getFormData = async () => {

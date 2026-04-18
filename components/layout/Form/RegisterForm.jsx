@@ -26,15 +26,6 @@ export default function RegisterForm() {
       return;
     }
 
-    // const existingUser = JSON.parse(localStorage.getItem("user"));
-    // if (existingUser && existingUser?.email === email) {
-    //   setError("User already exists, please login");
-    //   return;
-    // }
-
-    // const userData = { name, email, password };
-    // localStorage.setItem("user", JSON.stringify(userData));
-
     try {
       const res = await fetch('api/auth/register', {
         method: "POST",

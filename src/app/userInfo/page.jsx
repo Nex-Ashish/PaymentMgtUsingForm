@@ -32,7 +32,6 @@ export default function UserForm() {
         body: JSON.stringify(formData)
       })
 
-      // console.log('hhello')
       // console.log(res,'ddd')
 
       const data = await res.json();
