@@ -62,9 +62,15 @@ export default function TransactionData() {
 
       <Heading title="Transactions" className="pt-3 pb-10" />
 
-      <SearchBar placeholder="Search..." />
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 mb-4">
+        <div className="w-full sm:w-1/2">
+          <SearchBar placeholder="Search..." />
+        </div>
 
-      <FilterTransaction value={filter} onChange={setFilter} />
+        <div className="w-full sm:w-auto">
+          <FilterTransaction value={filter} onChange={setFilter} />
+        </div>
+      </div>
 
       <div className="bg-white p-4 rounded-xl shadow">
         
