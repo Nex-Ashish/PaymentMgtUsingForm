@@ -26,7 +26,8 @@ export default function Table({ columns, data, edit, query, currentPage }) {
         })
       })
       const data = await res?.json();
-      console.log(data,'patch-data')
+      window.location.reload()
+      // console.log(data,'patch-data')
     } catch (error) {
       console.log('Edit api fail')
     }
